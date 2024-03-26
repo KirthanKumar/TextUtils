@@ -1,0 +1,101 @@
+#16 - REACT ROUTER SETUP + USAGE:
+As this is a single page application, instead of bringing the entire page we can just render different component to make a different page keeping some of the components as it is. Without page reload.
+
+npm install react-router-dom // in project directory
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+in src/components/Navbar.js:
+<a className="navbar-brand text-danger" href="/">{props.title}</a> is changed to
+<Link className="navbar-brand text-danger" to="/">{props.title}</Link>
+
+If we use 'a' and 'href' the page will work but the page will reload. So we use 'Link' and 'to' instead. 
+
+errors encountered:
+https://stackoverflow.com/questions/63124161/attempted-import-error-switch-is-not-exported-from-react-router-dom
+In react-router-dom v6, "Switch" is replaced by routes "Routes". You need to update the import from
+
+https://stackoverflow.com/questions/70074873/reactjs-home-is-not-a-route-component-all-component-children-of-routes-m
+corrected: <Route path="/about" element={<About />} />
+
+-----------------------------------------------------------
+
+#17 - [FREE] BUILDING + HOSTING REACT APP FOR FREE ON GITHUB PAGES: https://create-react-app.dev/docs/deployment/ (github pages): 
+install github desktop https://desktop.github.com/
+install git https://git-scm.com/downloads 
+
+https://create-react-app.dev/docs/deployment/  --> in this go to 'github pages' section
+The pages which are hosted in the form of .github.io are called github pages.
+
+npm run build -> this creates 'build' folder in our project. This makes a static application out of our application. Now only this folder is enough for production deployment purpose. change directory to 'cd build' and open that folder with live server by pressing 'go live' on the bottom-right corner. Then we can see our application.  
+
+A traditional way of deploying in github is to go to settings of that perticular repository, go to pages and select source and click on save. After this if there is a index.html file in our root (that is repository) folder it starts to serve. But its a bit complecated in react, as it has router and many more things. And upon that the static files js css served by react is in build folder, how will that be copied? If we do it directly we get some problem , therefore to make this simple we see instructions from the documentation.
+
+https://create-react-app.dev/docs/deployment/  --> in this go to 'github pages' section
+
+Read 'Notes on client-side routing' section to understand why github pages does not support router. Due to this we removed the about page itself and router itself. We only had home page with navbar, alert and textform components only. Also relpace 'Link' with 'a' and 'to="/"' with 'href="#"'.
+
+Step 1: Open your package.json and add a homepage field for your project:
+"homepage": "https://KirthanKumar.github.io/TextUtils",
+
+Step 2: Install gh-pages and add deploy to scripts in package.json
+npm install --save gh-pages
+
+add below two lines to scripts in package.json
+"predeploy": "npm run build",
+"deploy": "gh-pages -d build",
+
+Step 3: Deploy the site by running npm run deploy
+npm run deploy
+
+Step 4: For a project page, ensure your project’s settings use gh-pages
+go to settings-> pages and change(if not changed automatically)
+
+
+Solution to host with routing::
+Replace <Router> tag with <HashRouter> and deploy it as mentioned above .
+
+-----------------------------------------------------------
+
+#18 - PURCHASING A DOMIAN + HOSTING TEXTUTILS ON A VPS:
+As we are doing normal hosting we dont need ph-pages module so uninstall it (npm uinstall gh-pages)
+
+npm run build
+
+If you have already created a droplet in digitalocean for some other site hosting, you can reuse it by going to 'destroy' and press on 'rebuild', if this is of no use anymore. By doing rebuild in this droplet again ubuntu gets installed. 
+
+watch this for getting more into deployment https://www.youtube.com/playlist?list=PLu0W_9lII9aiBNXUisDdSmfNbsKq407XC
+can also refer the blog https://www.codewithharry.com/blog/
+
+If we forget password we can go to 'access' then click on 'reset root password', then we will receive a emial with password. Then in terminal/powershell type 'ssh root@<ip_address_of_server>', then it asks password enter the one which you received in email. Then it asks for new passwod, enter it and reset. 
+
+sudo apt update
+
+sudo apt install nginx (now if we visit the ip address of server we see welcome page from nginx)
+
+Now will use filezilla to transfer file to server. fill host:<ip_address_of_server>, username:root, passwod:<passwod_of_server>, port:22 (FTP protocol)
+Change the directory in filezilla to /var/www/html/ and copt paste all files and folder inside build folder in here.
+Now we can see our static react app on our server ip.
+
+We can buy a domain and point to this ip address. Go to https://godaddy.com search and check for the domain name you want, if available buy it. Now in DNS management section point this domain to our server ip address
+
+Apply for ssl certificate
+
+-----------------------------------------------------------
+
+#19 - FIXING ISSUES AND WRAPPING UP TEXTUTILS: 
+{something remaining regarding hosting at 18:00, 26:00, 31:00}
+
+-----------------------------------------------------------
+
+#20 - EXERCISE 2: SOLUTIONS + SHOUTOUTS:  
+inside onclick we put a function not a function call.
+similarly how i did color pallet mode change for TextForm page, same way should do for About.js component also but no time to do.
+
+-----------------------------------------------------------
+
+#21 - FIXING FEW MORE TEXTUTILS ISSUES: 

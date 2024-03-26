@@ -1,0 +1,54 @@
+#7 - UNDERSTANDING STATE AND HANDLING EVENTS IN REACT:
+Components has many states. 
+
+{ useState } is a hook imported from "React"
+when we were earlier using class based components, we can set state directly by using this.state, but here we are using function based components, therefore hooks are used to use the class features without even creating the class and without reloading the page.
+
+import {useState} from 'react'
+const [text, setText] = useState("Enter text here");
+the above line a state variable text is set to a default value of "Enter text here"
+
+text = "new text" // wrong way to change the state 
+setText("new text") // correct way to change the state 
+
+When we are listening to some event like we are listening to onChange={handleOnChange} event for <textarea> in src/components/TextForm.js, the handleOnChange function will run aswell as we will get a event object.
+
+settext(event.target.value); // this sets the text value to the value that is fed by user into the textarea. That means as the state of the textarea is being changed as user is typing somethinf in the textarea, the state variable text is also changed.
+
+-----------------------------------------------------------
+
+#8 - ADDING MORE LOGIC TO TEXTUTILS:
+Added summary like word, character count and minutes to read the entered text. Added preview of text and functionally working buttons to convert to upper and lower case . 
+https://getbootstrap.com/docs/5.3/utilities/colors/
+https://getbootstrap.com/docs/5.3/utilities/background/
+
+-----------------------------------------------------------
+
+#9 - EXERCISE 1: ENHANCING TEXTUTILS:
+add your own functionatility buttons to perform something
+
+-----------------------------------------------------------
+
+#10 - CREATING "ENABLE DARK MODE" BUTTON USING useState Hook:
+dark mode light mode + about page
+
+-----------------------------------------------------------
+
+#11 - EXERCISE 1: SOLUTIONS+SHOUTOUTS:
+
+-----------------------------------------------------------
+
+#12 - IMPROVING DARK MODE AND REFACTORING APP COMPONENT:
+
+-----------------------------------------------------------
+
+#13 - ADDING + AUTO DISMISSING ALERT MESSAGES:
+
+-----------------------------------------------------------
+
+#14 - EXERCISE 2: ADDING CUSTOM COLOR THEME TO TEXTUTILS
+
+-----------------------------------------------------------
+
+#15 - CHANGING TITLE DYNAMICALLY AND ADDING FAVICONS TO TEXTUTILS:
+https://www.favicon-generator.org/

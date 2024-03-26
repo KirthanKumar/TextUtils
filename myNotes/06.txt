@@ -1,0 +1,69 @@
+#6 - UNDERSTANDING PROPS AND PROPTYPES IN REACT:
+We can send some things to custom components which can be used in that component. We can send string, object, boolean etc, by using these values the custom component renders itself.
+--> ES7 React/Redux/GraphQL/React-Native snippets (with semi-colons)
+this extension have many shortcuts that can be used to generate big code using one word. Glance it once.
+https://github.com/r5n-dev/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md
+
+clg-> console.log();
+
+rfc-> 
+import React from 'react';
+export default function Navbar() {
+  return (
+    <div>
+      
+    </div>
+  );
+}
+
+impt-> import PropTypes from 'prop-types'
+
+pts-> PropTypes.string
+
+pto-> PropTypes.object
+
+ptn-> PropTypes.number
+
+-----------------------------------------------------------
+
+default export and named export: example in file module2.mjs and module1.mjs
+
+-----------------------------------------------------------
+
+PROPS:
+create a component folder where all the components will be placed. And in 'Navbar.js' first letter should be always capital. type rfc(shortform for react function based component) + enter in that component (Navbar.js).
+
+props(properties) are like variable values passed from App.js to components. props should be the function argument for the component's export function.
+
+By doing this components are reuseable for other site or in the same site  by only changing the props.
+
+The props passed necessarily need not to be string only, we can also pass object, link etc..
+
+If there are many props we can group those as object and pass this object. And render the object values at the other end.
+
+PROPTYPES: 
+Determines the data-type of props on the receving end. If we send prop of type different than its proptype declared we get error. For example we have put title proptype as string in components/Navbar.js. If we send title = {45}, this gives an error.
+
+in src/components/Navbar.js:
+Navbar.propTypes = {
+  title: PropTypes.string,
+  aboutText: PropTypes.string,
+};
+
+in src/App.js:
+<Navbar title={45} aboutText="About TextUtils"/> // this gives error proptype does not match
+<Navbar title="textUtils" aboutText="About TextUtils"/> // this does not give error as proptype mmatch
+
+default props:
+If we dont pass the props the default props will be set.
+
+Navbar.defaultProps = {
+  home: "MyHome"
+}
+
+isRequired defines that this prop should be passed or should be given a defaultProp. If not throws error.
+if some prop is not marked isRequired and we dont pass the prop. That will not throw error but that prop will not be rendered itself.
+
+title: PropTypes.string.isRequired
+
+https://legacy.reactjs.org/docs/components-and-props.html
