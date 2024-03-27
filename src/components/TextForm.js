@@ -79,7 +79,7 @@ export default function TextForm(props) {
         </div>
         <button
           type="button"
-          className="btn btn-primary mx-3 my-2"
+          className="btn btn-primary mx-3 my-3"
           onClick={handleUpClick}
           disabled={text.length === 0}
         >
@@ -87,7 +87,7 @@ export default function TextForm(props) {
         </button>
         <button
           type="button"
-          className="btn btn-secondary mx-3"
+          className="btn btn-secondary mx-3 my-3"
           onClick={handleLowClick}
           disabled={text.length === 0}
         >
@@ -95,7 +95,7 @@ export default function TextForm(props) {
         </button>
         <button
           type="button"
-          className="btn btn-success mx-3"
+          className="btn btn-success mx-3 my-3"
           onClick={handleClearClick}
           disabled={text.length === 0}
         >
@@ -103,7 +103,7 @@ export default function TextForm(props) {
         </button>
         <button
           type="button"
-          className="btn btn-danger mx-3"
+          className="btn btn-danger mx-3 my-3"
           onClick={handleCopy}
           disabled={text.length === 0}
         >
@@ -111,7 +111,7 @@ export default function TextForm(props) {
         </button>
         <button
           type="button"
-          className="btn btn-warning mx-3"
+          className="btn btn-warning mx-3 my-3"
           onClick={handleExtraSpaces}
           disabled={text.length === 0}
         >
@@ -119,7 +119,7 @@ export default function TextForm(props) {
         </button>
         <button
           type="button"
-          className="btn btn-info mx-3"
+          className="btn btn-info mx-3 my-3"
           onClick={handleReverse}
           disabled={text.length === 0}
         >

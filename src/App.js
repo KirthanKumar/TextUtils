@@ -5,7 +5,7 @@ import "./App.css";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
 import Alert from "./components/Alert";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, HashRouter } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light"); // Whether dark mode is enabled or not
@@ -82,8 +82,8 @@ function App() {
   };
   return (
     <>
-      {/* Replaced <Router> tag with <HashRouter> */}
-      <Router>
+      {/* Replaced <Router> tag with <HashRouter> and run npm run deploy*/}
+      <HashRouter>
         {/*  Navbar component added, with props being passed */}
         <Navbar
           title="textUtils"
@@ -115,7 +115,7 @@ function App() {
             }
           />
         </Routes>
-      </Router>
+      </HashRouter>
     </>
   );
 }

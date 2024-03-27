@@ -57,7 +57,7 @@ go to settings-> pages and change(if not changed automatically)
 
 
 Solution to host with routing::
-Replace <Router> tag with <HashRouter> and deploy it as mentioned above .
+Replace <Router> tag with <HashRouter> and run npm run deploy (deploy it as mentioned above) .
 
 -----------------------------------------------------------
 
@@ -88,7 +88,51 @@ Apply for ssl certificate
 -----------------------------------------------------------
 
 #19 - FIXING ISSUES AND WRAPPING UP TEXTUTILS: 
-{something remaining regarding hosting at 18:00, 26:00, 31:00}
+'Copy text' button will not work until we get a ssl certificate for our site and make it https from http. This happened because javascript's Api does not work if we are not in https site for security purpose. 
+
+------------------------
+
+Another error faced was when we change path to '/about' in hosted website and reload the page we would get 404(not found) error. To solve this, login to server using putty and change path to 'cd /etc/nginx/sites-available'. do 'ls' and we see 'default' file. 
+vim default
+then comment out 'try_files $uri $uri/ =404;' and uncomment 'try_files $uri /index.html;' line. By doing this all the requests will be directed to index.html instead of throwing 404 error. 
+sudo service nginx restart
+after doing this our server will restart and the problem is solved.
+
+------------------------
+
+Enable http for our site
+https://www.codewithharry.com/blogpost/get-https-ubuntu-using-lets-encrypt/
+the above blog tells how to get https for apache server in ubuntu, but we used nginx so look into it carefully and get https for nginx server.
+
+https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/
+1. Download the Let’s Encrypt Client
+$ apt-get update
+$ sudo apt-get install certbot
+$ apt-get install python3-certbot-nginx
+
+2. Set Up NGINX (see documentation)
+$ nginx -t && nginx -s reload (running test and seeing if successful)
+
+3. Obtain the SSL/TLS Certificate
+$ sudo certbot --nginx -d example.com -d www.example.com
+(after this answer some questions)
+
+4. Automatically Renew Let’s Encrypt Certificates
+$ crontab -e (after running this we get a select prompt, select option 1. Then a file opens )
+
+0 12 * * * /usr/bin/certbot renew --quiet
+add above line to that file and save
+
+thats it we get https for our site. Now we will be able to perform copy text in our 'textutils'
+
+if want can refer this documentation also : https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+
+------------------------
+
+open filezilla and connect to server. Build our react application using 'npm build run'. Copy all the files and folders in 'build' folder of our react application and put it in /var/www/html/ folder of the server using drag and drop using filezilla.
+Now restart nginx server using:
+sudo service nginx restart
+After this all the changes will be reflected in our website.
 
 -----------------------------------------------------------
 
