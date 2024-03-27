@@ -59,6 +59,9 @@ go to settings-> pages and change(if not changed automatically)
 Solution to host with routing::
 Replace <Router> tag with <HashRouter> and run npm run deploy (deploy it as mentioned above) .
 
+
+After performing some changes in the project and pushing that to github, if you want it to reflect in the production site on github pages run 'npm run deploy' command.
+
 -----------------------------------------------------------
 
 #18 - PURCHASING A DOMIAN + HOSTING TEXTUTILS ON A VPS:
@@ -129,7 +132,7 @@ if want can refer this documentation also : https://www.digitalocean.com/communi
 
 ------------------------
 
-open filezilla and connect to server. Build our react application using 'npm build run'. Copy all the files and folders in 'build' folder of our react application and put it in /var/www/html/ folder of the server using drag and drop using filezilla.
+open filezilla and connect to server. Build our react application using 'npm run build'. Copy all the files and folders in 'build' folder of our react application and put it in /var/www/html/ folder of the server using drag and drop using filezilla.
 Now restart nginx server using:
 sudo service nginx restart
 After this all the changes will be reflected in our website.

@@ -80,23 +80,23 @@ export default function Navbar(props) {
                 </li>
               </ul>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link disabled" aria-disabled="true" to="/">
                 Disabled
               </Link>
-            </li>
+            </li> */}
           </ul>
 
           <button
             type="button"
-            className="btn mx-3 my-3"
+            className="btn mx-1"
             style={{ color: "black", backgroundColor: "Gray" }}
             onClick={props.removePalletMode}
           >
             Remove pallet and normalize mode
           </button>
 
-          <div className="d-flex mx-3 my-3">
+          <div className="d-flex mx-1">
             <div
               className="bg-light rounded mx-2"
               // inside onclick we put a function not a function call.
@@ -144,17 +144,17 @@ export default function Navbar(props) {
           <div
             className={`form-check form-switch text-${
               props.mode === "dark" ? "light" : "dark"
-            } mx-5`}
+            } mx-2`}
           >
             <input
-              className="form-check-input mx-3 my-3"
+              className="form-check-input mx-1"
               type="checkbox"
               role="switch"
               id="flexSwitchCheckDefault"
               onClick={props.toggleMode}
             />
             <label
-              className="form-check-label mx-3 my-3"
+              className="form-check-label mx-1"
               htmlFor="flexSwitchCheckDefault"
             >
               Enable Dark Mode
