@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import React, { useState } from "react"; // imrs
 import Navbar from "./components/Navbar";
 import "./App.css";
@@ -18,11 +17,6 @@ function App() {
     }, 1500);
   };
 
-  // for example when we click on red pallet, then backgroundColor changes to red by adding 'bg-danger' to className.
-  // After this when we click on other color pallet lets say blue, then 'bg-primary' is added to className, but
-  // backgroundColor does not change to blue it remains red.Because 'bg-danger' was added first it dominates and
-  // therefore when we click on blue pallet the backgroundColor does not changes.
-  // To resolve this we write removeBodyClass function.
   const removeBodyClasses = () => {
     document.body.classList.remove("bg-light");
     document.body.classList.remove("bg-primary");
@@ -48,7 +42,6 @@ function App() {
   };
 
   const applyPalletMode = (cls) => {
-    // console.log(cls);
     removeBodyClasses();
     document.body.classList.add(`bg-${cls}`);
     if (
@@ -66,13 +59,6 @@ function App() {
       document.body.style.backgroundColor = "gray";
       showAlert("Dark mode has been enabled", "success");
       document.title = "textUtils - Dark Mode";
-
-      // setInterval(() => {
-      //   document.title = "textUtils is amazing";
-      // }, 700);
-      // setInterval(() => {
-      //   document.title = "Install textUtils now";
-      // }, 300);
     } else if (mode === "dark") {
       setMode("light");
       document.body.style.backgroundColor = "white";
@@ -80,11 +66,10 @@ function App() {
       document.title = "textUtils - Light Mode";
     }
   };
+
   return (
     <>
-      {/* Replaced <Router> tag with <HashRouter> and run npm run deploy*/}
       <HashRouter>
-        {/*  Navbar component added, with props being passed */}
         <Navbar
           title="textUtils"
           aboutText="About TextUtils"
@@ -94,15 +79,7 @@ function App() {
           removePalletMode={removeBodyClasses}
         />
         <Alert alert={alert} />
-        {/* <TextForm
-          heading="Enter your text to analyze below"
-          mode={mode}
-          showalert={showAlert}
-        /> */}
-        {/* <About /> */}
-
         <Routes>
-          {/* Its always a good idea to use "exact" with 'path', because if we didn't use 'exact' react would do partial matching. But if 'exact' is used it does exact matching.*/}
           <Route exact path="/about" element={<About mode={mode} />} />
           <Route
             path="/"

@@ -1,10 +1,64 @@
-import React, { useState } from "react"; // rfc
+import React, { useState, useEffect } from "react";
 
 export default function TextForm(props) {
+  const [text, settext] = useState("");
+  let timestamps = [];
+
+  useEffect(() => {
+    const typingArea = document.getElementById("myTextArea");
+    if (typingArea) {
+      typingArea.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      if (typingArea) {
+        typingArea.removeEventListener("keydown", handleKeyDown);
+      }
+    };
+  }, []);
+
+  const handleKeyDown = (event) => {
+    timestamps.push(Date.now());
+
+    if (timestamps.length >= 20) {
+      analyzeTiming();
+    }
+  };
+
+  const analyzeTiming = () => {
+    let intervals = timestamps
+      .slice(1)
+      .map((time, index) => time - timestamps[index]);
+    let meanInterval =
+      intervals.reduce((sum, interval) => sum + interval, 0) / intervals.length;
+    let stddevInterval = Math.sqrt(
+      intervals.reduce(
+        (sum, interval) => sum + Math.pow(interval - meanInterval, 2),
+        0
+      ) / intervals.length
+    );
+
+    console.log(`Mean interval: ${meanInterval.toFixed(4)} ms`);
+    console.log(`Standard deviation: ${stddevInterval.toFixed(4)} ms`);
+
+    if (meanInterval < 100 && stddevInterval < 50) {
+      console.log("Keystrokes appear to be automated.");
+      showAlertAndCloseTab();
+    } else {
+      console.log("Keystrokes appear to be manually entered.");
+    }
+
+    // Clear timestamps after analysis
+    timestamps = [];
+  };
+
+  const showAlertAndCloseTab = () => {
+    alert("Keystrokes appear to be automated. This tab will be closed.");
+    window.close();
+  };
+
   const handleUpClick = () => {
-    // console.log("Uppercase was clicked");
     let newText = text.toUpperCase();
-    // settext("You have clicked on handleUpClick");
     settext(newText);
     props.showalert("Converted to upper case!", "success");
   };
@@ -19,44 +73,26 @@ export default function TextForm(props) {
     props.showalert("The text was cleared!", "success");
   };
 
-  // const handleCopy = () => {
-  //   var text = document.getElementById("myTextArea");
-  //   text.select();
-  //   navigator.clipboard.writeText(text.value); 
-  //   document.getSelection().removeAllRanges(); // this deselects the selection of text which was happening after we copy text
-  //   props.showalert("The text was copied to clipboard!", "success");
-  // };
-  
-  // below handleCopy function is enough
   const handleCopy = () => {
     navigator.clipboard.writeText(text);
     props.showalert("The text was copied to clipboard!", "success");
   };
 
   const handleExtraSpaces = () => {
-    let newText = text.split(/[ ]+/);
-    settext(newText.join(" "));
+    let newText = text.split(/[ ]+/).join(" ");
+    settext(newText);
     props.showalert("Extra spaces were removed!", "success");
   };
 
   const handleReverse = (event) => {
-    let strArr = text.split("");
-    strArr = strArr.reverse();
-    let newStr = strArr.join("");
-    settext(newStr);
+    let newText = text.split("").reverse().join("");
+    settext(newText);
     props.showalert("The text was reversed!", "success");
   };
 
   const handleOnChange = (event) => {
-    // console.log("On Change");
-    settext(event.target.value); // this sets the text value to the value that is fed by user into the textarea. That means
-    // as the state of the textarea is being changed as user is typing somethinf in the textarea, the state variable text is
-    // also changed.
-    // settext("you type anything in this textarea you see only this");
+    settext(event.target.value);
   };
-
-  // const [text,setText] = useState("Enter text here");
-  const [text, settext] = useState("");
 
   let stylemi = {
     color: props.mode === "dark" ? "white" : "black",
@@ -125,12 +161,6 @@ export default function TextForm(props) {
         >
           Reverse
         </button>
-        {/* <button type="button" className="btn btn-light mx-3 my-2">
-          Light
-        </button>
-        <button type="button" className="btn btn-dark mx-3 my-2">
-          Dark
-        </button> */}
       </div>
       <div
         className="container my-3"
@@ -140,9 +170,8 @@ export default function TextForm(props) {
           backgroundColor: props.mode === "dark" ? "gray" : "white",
         }}
       >
-        <h1>Your text summery:</h1>
+        <h1>Your text summary:</h1>
         <p>
-          {/* {text.split(" ").length} words and {text.length} characters */}
           {
             text.split(/\s+/).filter((element) => {
               return element.length !== 0;
